@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: app
+      dockerfile: ../App.Dockerfile
+      target: before-deps-install
+    image: node-latest-alpine
+    container_name: marvel_app
+    ports:
+      - "80:3000"
+    volumes:
+      - ./app:/home/node/app
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  api:
+    build:
+      context: api
+      dockerfile: ../Api.Dockerfile
+      target: before-deps-install
+    image: node-8.10-alpine
+    restart: unless-stopped
+    container_name: marvel_api
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api:/home/node/app
