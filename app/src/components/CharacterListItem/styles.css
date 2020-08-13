@@ -1,0 +1,21 @@
+.characterListItem {
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  background-color: var(--background);
+}
+
+.characterThumbnailImage {
+  width: 220px;
+  height: 220px;
+}
+
+.characterInfo {
+  text-align: center;
+}
+
+.characterName {
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin-top: 1rem;
+}
