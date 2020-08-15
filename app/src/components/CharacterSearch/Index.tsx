@@ -1,17 +1,29 @@
 import React, { FormEvent } from 'react';
 
-import { searchTerm } from '../../services/ApiClient/Index';
+import { useDebouncedCallback } from 'use-debounce';
+
+import { searchTerm } from '../../services/Cache/Index';
 
 const CharacterSearch = () => {
-  const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+
+  const [setSearchTerm] = useDebouncedCallback((value: string) => {
     searchTerm(value);
+  },
+    500
+  );
+
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    setSearchTerm(event.currentTarget.value);
   }
+
+  /* useDebouncedCallback((value) => {
+    debugger;
+  },
+    500
+  ); */
+
   return (
-    <>
-      <p>SearchTerm is: {searchTerm()}</p>
-      <input type="text" onChange={handleChange} />
-    </>
+    <input type="text" onChange={handleChange} />
   );
 }
 
