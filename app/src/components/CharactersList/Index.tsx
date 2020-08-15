@@ -1,45 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+import { gql, useQuery } from '@apollo/client';
 
 import CharacterListItem, { CharacterAttributes } from '../CharacterListItem/Index';
+
+import { searchTerm } from '../../services/ApiClient/Index';
 
 import './styles.css';
 
 const CharactersList = () => {
-  const [charactersList, setCharacters] = useState([]);
+  const SPECIFIC_CHARACTERS = gql`
+    query Characters($searchTerm : String!) {
+      characters(where: {nameStartsWith: $searchTerm}) {
+        id
+        name
+        thumbnail
+      }
+      searchTerm @client
+    }
+  `;
 
-  useEffect(() => {
-    const characters = getCharacters()
-    .then((characterData) => {
-      setCharacters(characterData.data.characters);
-    })
+  const FIRST_CHARACTERS = gql`
+    query {
+      characters {
+        id
+        name
+        thumbnail
+      }
+      searchTerm @client
+    }`;
+
+  const CHARACTERS_QUERY = searchTerm() === "" ? FIRST_CHARACTERS : SPECIFIC_CHARACTERS;
+
+  const CHARACTER_PLACEHOLDER = { name: 'Loading Character...', thumbnail: ""};
+
+  const { loading, error, data } = useQuery(
+    CHARACTERS_QUERY, 
+    {
+      variables: {
+        searchTerm: searchTerm() 
+      }
   });
 
-  const getCharacters = async (query = "{ characters {name, thumbnail} }") => {
-    const apiEndpoint = 'http://localhost:4000';
-
-    const response = await fetch(apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        query
-      })
-    })
-
-    return await response.json();
-  }
+  const characters = loading ? Array(16).fill(CHARACTER_PLACEHOLDER) : data.characters || [] ;
 
   return (
-    <div className="characterList">
-      { charactersList.map(
-          (character: CharacterAttributes) => {
-            return <CharacterListItem 
-              name={character.name}
-              thumbnail={character.thumbnail} 
-            />
-          }
-        )
-      }
-    </div>
+    <>
+      <div className="characterList">
+        {characters.map(
+            (character: CharacterAttributes) => {
+              return <CharacterListItem 
+                key={character.id}
+                name={character.name}
+                thumbnail={character.thumbnail}
+              />
+            }
+          )
+        }
+      </div>
+    </>
   );
 }
 

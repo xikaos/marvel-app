@@ -3,6 +3,7 @@ import React from 'react';
 import './styles.css';
 
 export interface CharacterAttributes {
+  id?: string,
   name: string,
   thumbnail: string
 }
