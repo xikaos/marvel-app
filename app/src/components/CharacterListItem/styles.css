@@ -2,7 +2,7 @@
   padding-bottom: 2rem;
   border-radius: 1rem;
   margin: 1rem;
-  background-color: var(--background);
+  background-color: var(--background-dark);
 }
 
 .characterThumbnail {

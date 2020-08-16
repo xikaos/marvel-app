@@ -4,7 +4,13 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { searchTerm } from '../../services/Cache/Index';
 
+import './styles.css';
+
 const CharacterSearch = () => {
+
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    setSearchTerm(event.currentTarget.value);
+  }
 
   const [setSearchTerm] = useDebouncedCallback((value: string) => {
     searchTerm(value);
@@ -12,18 +18,13 @@ const CharacterSearch = () => {
     500
   );
 
-  const handleChange = (event: FormEvent<HTMLInputElement>) => {
-    setSearchTerm(event.currentTarget.value);
-  }
-
-  /* useDebouncedCallback((value) => {
-    debugger;
-  },
-    500
-  ); */
-
   return (
-    <input type="text" onChange={handleChange} />
+    <>
+    <div className="searchField">
+      <label htmlFor="searchInput" defaultValue="Spider Man">Character Name</label>
+      <input type="text" onChange={handleChange} id="searchInput"/>
+    </div>
+    </>
   );
 }
 

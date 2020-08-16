@@ -1,0 +1,24 @@
+#searchInput {
+  min-width: 28rem;
+  min-height: 2.8rem;
+  display: inline-block;
+  color: var(--primary);
+  background-color: hsla(230,9%,45%,1);
+  border-color: var(--background-lighter);
+  border-radius: 0.5rem;
+}
+
+#searchInput:focus {
+  border-color: var(--green);
+}
+
+.searchField {
+  margin: 1rem 1.5rem;
+}
+
+
+.searchField label {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}

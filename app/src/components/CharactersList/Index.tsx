@@ -15,9 +15,14 @@ const CharactersList = () => {
   const { loading, error, data } = useQuery(CHARACTERS_QUERY, {
      variables: { searchTerm: searchTerm() }
   });
+
+  const searchHasNoResults = () => {
+    return data.characters && data.characters.length === 0;
+  }
   
-  if (error) return <h2>Error fetching from data source.</h2>;
-  if (loading) return <h2>Loading...</h2>;
+  if (error) return <h3 className="error">Error fetching from data source.</h3>;
+  if (loading) return <h2 className="loading">Loading...</h2>;
+ if (searchHasNoResults()) return <h3 className="noResults">No results for {searchTerm()}.</h3>
 
   return (
       <div className="characterList">
