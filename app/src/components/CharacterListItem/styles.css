@@ -1,5 +1,4 @@
 .characterListItem {
-  padding-bottom: 2rem;
   border-radius: 1rem;
   margin: 1rem;
   background-color: var(--background-dark);
@@ -19,10 +18,19 @@
 
 .characterInfo {
   text-align: center;
+  min-height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
 }
 
 .characterName {
   font-size: 1.6rem;
   color: var(--primary);
-  margin-top: 1rem;
+}
+
+.characterPageLink {
+  text-decoration: none;
+  color: var(--white);
 }

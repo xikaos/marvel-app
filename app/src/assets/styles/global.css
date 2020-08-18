@@ -2,7 +2,7 @@
   --background-dark: #282a36;
   --background-dark-light: #454754;
   --background-grey-light: #454754;
-  --foreground: #f8f8f2;
+  --white: #f8f8f2;
   --green: #50fa7b;
   --pink: #ff79c6;
   --blue: #8be9fd;
@@ -32,7 +32,7 @@ body {
 
 body, input, button, textarea {
   font-family: 'Merriweather Sans', sans-serif;
-  color: var(--foreground);
+  color: var(--white);
 }
 
 .container {

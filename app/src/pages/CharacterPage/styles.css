@@ -1,5 +1,8 @@
+.characterName {
+  margin: 1rem 0;
+}
+
 .characterImage {
-  margin: 2rem 0;
   max-height: 48rem;
 }
 
@@ -15,6 +18,9 @@
 
 .characterDescription {
   font-size: 1.45rem;
-  margin-bottom: 2rem;
+  margin: 1rem 1rem;
 }
 
+.serieName {
+  font-size: 1.35rem;
+}

@@ -13,7 +13,7 @@ export interface CharacterAttributes {
 
 const CharacterListItem: React.FC<CharacterAttributes> = ({ id, name, thumbnail }) => {
   return (
-    <Link to={`/characters/${id}`}>
+    <Link to={`/characters/${id}`} className="characterPageLink">
       <div className="characterListItem">
         <div className="characterThumbnail">
           <img src={thumbnail} alt="" className="characterThumbnailImage"/>

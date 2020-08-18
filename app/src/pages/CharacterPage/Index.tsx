@@ -28,14 +28,16 @@ const CharacterPage: React.FC<RouteComponentProps<CharacterPageParams>> = ({matc
   if (loading) return <h2>Loading Character Data...</h2>;
 
   const [character] = data.characters;
-  const { name, description, thumbnail, series } = character;
+  const { name, description, thumbnail } = character;
+  const characterDescription = description === "" ? `No description for ${name}` : description
+
   return (
     <div className="container">
       <h1 className="pageTitle">Character Page</h1>
       <div>
         <h1 className="characterName">{name}</h1>
         <img className="characterImage" src={thumbnail} alt={`${name} Thumbnail`} />
-        <p className="characterDescription">{description}</p>
+        <p className="characterDescription">{characterDescription}</p>
         <h2>Series</h2>
         <ul>
           {
