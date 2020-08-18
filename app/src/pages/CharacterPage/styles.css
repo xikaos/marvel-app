@@ -1,0 +1,20 @@
+.characterImage {
+  margin: 2rem 0;
+  max-height: 48rem;
+}
+
+.serieLink {
+  text-decoration: none;
+  color: var(--blue);
+  font-size: 1.6rem;
+}
+
+.serieName {
+  list-style: none;
+}
+
+.characterDescription {
+  font-size: 1.45rem;
+  margin-bottom: 2rem;
+}
+

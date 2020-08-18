@@ -4,13 +4,13 @@ import { useQuery } from '@apollo/client';
 
 import CharacterListItem, { CharacterAttributes } from '../CharacterListItem/Index';
 
-import { searchTerm } from '../../services/Cache/Index';
-import { FIRST_CHARACTERS, SPECIFIC_CHARACTERS } from '../../services/Queries/Index';
+import { searchTerm } from '../../services/Cache/Index';  
+import { FIRST_CHARACTERS, CHARACTERS_BY_NAME } from '../../services/Queries/Index';
 
 import './styles.css';
 
 const CharactersList = () => {
-  const CHARACTERS_QUERY = searchTerm() === "" ? FIRST_CHARACTERS : SPECIFIC_CHARACTERS;
+  const CHARACTERS_QUERY = searchTerm() === "" ? FIRST_CHARACTERS : CHARACTERS_BY_NAME;
 
   const { loading, error, data } = useQuery(CHARACTERS_QUERY, {
      variables: { searchTerm: searchTerm() }
@@ -22,16 +22,17 @@ const CharactersList = () => {
   
   if (error) return <h3 className="error">Error fetching from data source.</h3>;
   if (loading) return <h2 className="loading">Loading...</h2>;
- if (searchHasNoResults()) return <h3 className="noResults">No results for {searchTerm()}.</h3>
+  if (searchHasNoResults()) return <h3 className="noResults">No results for {searchTerm}</h3> 
 
   return (
       <div className="characterList">
         {data.characters.map(
-            (character: CharacterAttributes) => {
+            ({id, name, thumbnail}: CharacterAttributes) => {
               return <CharacterListItem 
-                key={character.id}
-                name={character.name}
-                thumbnail={character.thumbnail}
+                key={id}
+                id={id}
+                name={name}
+                thumbnail={thumbnail}
               />
             }
           )

@@ -8,9 +8,10 @@ export const FIRST_CHARACTERS = gql`
       thumbnail
     }
     searchTerm @client
-  }`;
+  }
+`;
 
-export const SPECIFIC_CHARACTERS = gql`
+export const CHARACTERS_BY_NAME = gql`
   query Characters($searchTerm : String!) {
     characters(where: {nameStartsWith: $searchTerm}) {
       id
@@ -18,5 +19,22 @@ export const SPECIFIC_CHARACTERS = gql`
       thumbnail
     }
     searchTerm @client
-  }`;
+  }
+`;
 
+export const CHARACTER_BY_ID = gql`
+  query CharacterById($id: Int!){
+    characters(where: {id: $id}, limit: 1) {
+      id
+      name
+      description
+      thumbnail,
+      series {
+        resourceURI
+        name
+      }
+    }
+  }
+`;
+
+//  
