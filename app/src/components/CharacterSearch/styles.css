@@ -2,8 +2,6 @@
   min-width: 28rem;
   min-height: 2.8rem;
   display: inline-block;
-  color: var(--primary);
-  background-color: hsla(230,9%,45%,1);
   border-color: var(--background-lighter);
   border-radius: 0.5rem;
 }

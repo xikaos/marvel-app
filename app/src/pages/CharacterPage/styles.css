@@ -4,16 +4,7 @@
 
 .characterImage {
   max-height: 48rem;
-}
-
-.serieLink {
-  text-decoration: none;
-  color: var(--blue);
-  font-size: 1.6rem;
-}
-
-.serieName {
-  list-style: none;
+  border-radius: 1rem;
 }
 
 .characterDescription {
@@ -21,6 +12,17 @@
   margin: 1rem 1rem;
 }
 
-.serieName {
-  font-size: 1.35rem;
+button {
+  margin: 1rem;
+  border-radius: 0.5rem;
+}
+
+.loadSeries {
+  padding: 1rem;
+  background-color: var(--background-grey-light);
+}
+
+.editCharacter {
+  padding: 1rem;
+  background-color: var(--pink);
 }

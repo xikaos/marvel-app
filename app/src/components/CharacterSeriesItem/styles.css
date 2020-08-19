@@ -1,22 +1,22 @@
-.characterListItem {
+.seriesListItem {
   border-radius: 1rem;
   margin: 1rem;
   background-color: var(--background-dark);
 }
 
-.characterThumbnail {
+.seriesThumbnail {
   width: 220px;
   height: 220px;
   border-radius: 1rem 1rem 0 0;
 }
 
-.characterThumbnailImage {
+.seriesThumbnailImage {
   width: 220px;
   height: 220px;
   border-radius: 1rem 1rem 0 0;
 }
 
-.characterInfo {
+.seriesInfo {
   text-align: center;
   min-height: 6rem;
   display: flex;
@@ -25,12 +25,7 @@
   margin: 0 1rem;
 }
 
-.characterName {
+.seriesName {
   font-size: 1.6rem;
   color: var(--primary);
-}
-
-.characterPageLink {
-  text-decoration: none;
-  color: var(--white);
 }

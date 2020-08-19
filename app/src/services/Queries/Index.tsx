@@ -28,11 +28,16 @@ export const CHARACTER_BY_ID = gql`
       id
       name
       description
-      thumbnail,
-      series {
-        resourceURI
-        name
-      }
+      thumbnail
+    }
+  }
+`;
+
+export const SERIES_BY_CHARACTER_ID = gql`
+  query SeriesByCharacterId($id: ID!){
+    series(where: {characters: [$id] }, orderBy: startYear_desc) {
+      title,
+      thumbnail
     }
   }
 `;
