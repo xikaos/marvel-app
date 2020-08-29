@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import './styles.css';
 
 interface CharacterEditModalProps {
-  closeModal: Dispatch<SetStateAction<boolean>>
+  closeModal: Function
 }
 
 const CharacterEditModal: React.FC<CharacterEditModalProps> = ({ closeModal }) => {
