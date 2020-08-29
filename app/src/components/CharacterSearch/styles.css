@@ -4,6 +4,7 @@
   display: inline-block;
   border-color: var(--background-lighter);
   border-radius: 0.5rem;
+  color: black;
 }
 
 #searchInput:focus {
