@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-export interface CharacterAttributes {
-  id?: string,
+export type CharacterAttributes = {
+  id: string,
   name: string,
   thumbnail: string,
-  description?: string
+  description: string
 }
 
-const CharacterListItem: React.FC<CharacterAttributes> = ({ id, name, thumbnail }) => {
+type Props = React.FC<Omit<CharacterAttributes, "description" >> 
+
+const CharacterListItem: Props = ({ id, name, thumbnail }) => {
   return (
     <Link to={`/characters/${id}`} className="characterPageLink">
       <div className="characterListItem">

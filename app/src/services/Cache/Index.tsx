@@ -1,16 +1,38 @@
 import { InMemoryCache } from "@apollo/client";
 
-const characterPlaceholder = {name: 'Loading...', 'thumbnail': ""};
+const getCharacterFromLocalStorage = (id: string) => {
+  return JSON.parse(localStorage.getItem(id) as string);
+}
 
 export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
+    Character: {
+      fields: {
+        name: {
+          read(name, cache) {
+            const characterId = cache.readField("id") as string;
+            const storedCharacter = getCharacterFromLocalStorage(characterId);
+            return storedCharacter ? storedCharacter.name : name;
+          }
+        },
+        thumbnail: {
+          read(image, cache) {
+            const characterId = cache.readField("id") as string;
+            const storedCharacter = getCharacterFromLocalStorage(characterId);
+            return storedCharacter ? storedCharacter.image : image;
+          }
+        },
+        description: {
+          read(description, cache) {
+            const characterId = cache.readField("id") as string;
+            const storedCharacter = getCharacterFromLocalStorage(characterId);
+            return storedCharacter ? storedCharacter.description : description;
+          }
+        }
+      }
+    },
     Query: {
       fields: {
-        characters: {
-          read(existing, {readField}){
-            return existing === undefined ? { characters: Array(20).fill(characterPlaceholder) } : existing;
-          } 
-        },
         searchTerm: {
           read() {
             return searchTerm();

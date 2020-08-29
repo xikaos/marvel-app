@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
@@ -9,37 +9,49 @@ import CharacterEditModal from '../../components/CharacterEditModal/Index';
 
 import './styles.css';
 
-interface CharacterPageParams {
-  id: string
-}
+type Props = React.FC<RouteComponentProps<{id: string}>>;
 
-const CharacterPage: React.FC<RouteComponentProps<CharacterPageParams>> = ({match}) => {
+const CharacterPage: Props = ({match}) => {
+  const characterId = match.params.id;
+  const [characterName, setCharacterName] = useState("");
+  const [characterImage, setCharacterImage] = useState("");
+  const [characterDescription, setCharacterDescription] = useState("");
   const [showCharacterSeries, setShowCharacterSeries] = useState(false);
   const [showCharacterEditModal, setShowCharacterEditModal] = useState(false);
-  const { id } = match.params;
 
+  
   const { error, loading, data } = useQuery(CHARACTER_BY_ID, {
     variables: {
-      id: Number(id)
+      id: Number(characterId)
     }
   });
+
+  useEffect(() => {
+    if(data){
+      const [character] = data.characters;
+      const { name, description, thumbnail } = character;
+  
+      setCharacterName(name);
+      setCharacterDescription(description);
+      setCharacterImage(thumbnail);
+    }
+  }, [data])
 
   if (error) return <h2>Error fetching from data source:<br/> {error.message}</h2>;
   if (loading) return <h2>Loading Character Data...</h2>;
 
-  const [character] = data.characters;
-  const { name, description, thumbnail } = character;
+  
 
   return (
     <>
       <div className="container">
         <h1 className="pageTitle">Character Page</h1>
         <div>
-          <h1 className="characterName">{name}</h1>
-          <img className="characterImage" src={thumbnail} alt={`${name} Thumbnail`} />
+          <h1 className="characterName">{characterName}</h1>
+          <img className="characterImage" src={characterImage} alt={`${characterName} Thumbnail`} />
           <p className="characterDescription">
             {
-              description === "" ? `No description for ${name}` : description
+              characterDescription === "" ? `No description for ${characterName}` : characterDescription
             }
           </p>
           <button className="editCharacter" onClick={() => { setShowCharacterEditModal(true) }}>
@@ -47,7 +59,7 @@ const CharacterPage: React.FC<RouteComponentProps<CharacterPageParams>> = ({matc
           </button>
           {
             showCharacterSeries ?
-              <CharacterSeries id={Number(id)} /> :
+              <CharacterSeries id={Number(characterId)} /> :
               <button className="loadSeries" onClick={() => { setShowCharacterSeries(true) }}>
                 Load Character Series
               </button>
@@ -56,7 +68,13 @@ const CharacterPage: React.FC<RouteComponentProps<CharacterPageParams>> = ({matc
       </div>
       {
         showCharacterEditModal ?
-          <CharacterEditModal closeModal={() => { setShowCharacterEditModal }} /> :
+          <CharacterEditModal 
+            id={characterId}
+            name={[characterName, setCharacterName]}
+            image={[characterImage, setCharacterImage]}
+            description={[characterDescription, setCharacterDescription]}
+            closeModal={() => { setShowCharacterEditModal(false) }}
+          /> :
           null
       }
     </>

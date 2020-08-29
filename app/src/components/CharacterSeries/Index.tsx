@@ -7,11 +7,9 @@ import './styles.css';
 
 import CharacterSeriesItem, { Series } from '../CharacterSeriesItem/Index';
 
-interface CharacterSeriesProps {
-  id: Number
-}
+type Props = React.FC<{id: Number}>;
 
-const CharacterSeries: React.FC<CharacterSeriesProps> = ({ id }) => {
+const CharacterSeries: Props = ({ id }) => {
   const { error, loading, data } = useQuery(SERIES_BY_CHARACTER_ID, {
     variables: {
       id

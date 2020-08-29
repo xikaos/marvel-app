@@ -2,7 +2,7 @@ import React from 'react';
 
 import './styles.css';
 
-export interface Series {
+export type Series = {
   title: string,
   thumbnail: string
 }
